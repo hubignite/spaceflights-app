@@ -52,3 +52,14 @@ mat-card-content p {
   border-radius: 4px;
   margin: 20px 0;
 }
+
+.filter-form {
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-form mat-form-field {
+  width: 140px;
+  padding-right: 10px;
+}
+
