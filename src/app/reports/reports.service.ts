@@ -25,10 +25,10 @@ export interface ReportsResponse {
 @Injectable({
   providedIn: 'root'
 })
-export class ReportsService {  private apiUrl = 'https://api.spaceflightnewsapi.net/v4/reports';
+export class ReportsService {
+  private apiUrl = 'https://api.spaceflightnewsapi.net/v4/reports';
 
   constructor(private http: HttpClient) { }
-
   getReports(limit: number = 10): Observable<Report[]> {
     const params = new HttpParams()
       .set('limit', limit.toString());
