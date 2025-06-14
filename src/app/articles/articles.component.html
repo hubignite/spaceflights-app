@@ -1,6 +1,14 @@
 <div class="articles-container">
   <h2>Latest Spaceflight News</h2>
 
+  <form (ngSubmit)="loadArticles()" class="filter-form" #filterForm="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Number of articles</mat-label>
+      <input matInput type="number" min="1" max="100" [(ngModel)]="articleCount" name="articleCount">
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit">Filter</button>
+  </form>
+
   <div *ngIf="loading" class="loading-spinner">
     <mat-spinner diameter="40"></mat-spinner>
   </div>
