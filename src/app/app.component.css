@@ -1,0 +1,8 @@
+mat-toolbar {
+  margin-bottom: 8px;
+}
+
+mat-tab-nav-panel {
+  margin: 8px;
+  min-height: calc(100vh - 128px);
+}

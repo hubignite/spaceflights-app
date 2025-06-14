@@ -2,9 +2,11 @@
   <span>Spaceflights Info</span>
 </mat-toolbar>
  
-<nav mat-tab-nav-bar>
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
   <a mat-tab-link routerLink="/articles" routerLinkActive #rlaArticles="routerLinkActive" [active]="rlaArticles.isActive">Articles</a>
   <a mat-tab-link routerLink="/blogs" routerLinkActive #rlaBlogs="routerLinkActive" [active]="rlaBlogs.isActive">Blogs</a>
   <a mat-tab-link routerLink="/reports" routerLinkActive #rlaReports="routerLinkActive" [active]="rlaReports.isActive">Reports</a>
 </nav>
-<router-outlet></router-outlet>
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>
