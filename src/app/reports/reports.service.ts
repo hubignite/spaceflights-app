@@ -1,41 +1,45 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface Report {
-  id: string;
+  id: number;
   title: string;
-  date: string;
-  content: string;
-  author: string;
-  category: string;
+  authors: string[];
+  url: string;
+  image_url: string;
+  news_site: string;
+  summary: string;
+  published_at: string;
+  updated_at: string;
+}
+
+export interface ReportsResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Report[];
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReportsService {
-  private apiUrl = 'https://api.spaceflightnewsapi.net/v4/reports/?limit=10'; // Replace with your actual API endpoint
+export class ReportsService {  private apiUrl = 'https://api.spaceflightnewsapi.net/v4/reports';
 
   constructor(private http: HttpClient) { }
 
-  getReports(): Observable<Report[]> {
-    return this.http.get<Report[]>(this.apiUrl);
+  getReports(limit: number = 10): Observable<Report[]> {
+    const params = new HttpParams()
+      .set('limit', limit.toString());
+
+    return this.http.get<ReportsResponse>(this.apiUrl, { params })
+      .pipe(
+        map(response => response.results)
+      );
   }
 
-  getReportById(id: string): Observable<Report> {
+  getReportById(id: number): Observable<Report> {
     return this.http.get<Report>(`${this.apiUrl}/${id}`);
-  }
-
-  createReport(report: Omit<Report, 'id'>): Observable<Report> {
-    return this.http.post<Report>(this.apiUrl, report);
-  }
-
-  updateReport(id: string, report: Partial<Report>): Observable<Report> {
-    return this.http.put<Report>(`${this.apiUrl}/${id}`, report);
-  }
-
-  deleteReport(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

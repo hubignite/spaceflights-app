@@ -14,9 +14,8 @@ import { ReportsService, Report } from './reports.service';
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css'
 })
-export class ReportsComponent implements OnInit {
-  reports: Report[] = [];
-  displayedColumns: string[] = ['title', 'date', 'author', 'category', 'actions'];
+export class ReportsComponent implements OnInit {  reports: Report[] = [];
+  displayedColumns: string[] = ['title', 'news_site', 'published_at', 'actions'];
 
   constructor(private reportsService: ReportsService) {}
 
@@ -29,10 +28,7 @@ export class ReportsComponent implements OnInit {
       reports => this.reports = reports
     );
   }
-
-  deleteReport(id: string) {
-    this.reportsService.deleteReport(id).subscribe(() => {
-      this.loadReports();
-    });
+  openReport(url: string) {
+    window.open(url, '_blank');
   }
 }
